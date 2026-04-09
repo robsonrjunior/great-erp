@@ -79,6 +79,7 @@
     "pretest": "npm run lint",
     "test": "ng test --coverage",
     "test:watch": "npm run test -- --watch",
+    "tls:keystore:generate": "bash ./scripts/generate-keystore.sh",
     "watch": "concurrently npm:start npm:backend:start",
     "webapp:build": "npm run clean-www && npm run webapp:build:dev",
     "webapp:build:dev": "ng build --configuration development",
