@@ -1,0 +1,250 @@
+<div>
+  <h2 id="page-heading" data-cy="SaleHeading">
+    <span jhiTranslate="greatErpApp.sale.home.title">Sales</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="greatErpApp.sale.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sale"
+        [routerLink]="['/sale/new']"
+      >
+        <fa-icon icon="plus" />
+        <span class="hidden-sm-down" jhiTranslate="greatErpApp.sale.home.createLabel">Criar novo Sale</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="greatErpApp.sale.home.search">Pesquisar por Sale</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'greatErpApp.sale.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch())">
+          <fa-icon icon="search" />
+        </button>
+
+        @if (currentSearch()) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt" />
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  <jhi-filter [filters]="filters" />
+
+  @if (sales().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="greatErpApp.sale.home.notFound">Nenhum Sale encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">Código</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="saleDate">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.sale.saleDate">Sale Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="saleNumber">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.sale.saleNumber">Sale Number</span>
+                @if (!currentSearch()) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.sale.status">Status</span>
+                @if (!currentSearch()) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="grossAmount">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.sale.grossAmount">Gross Amount</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="discountAmount">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.sale.discountAmount">Discount Amount</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="netAmount">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.sale.netAmount">Net Amount</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="notes">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.sale.notes">Notes</span>
+                @if (!currentSearch()) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedAt">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.sale.deletedAt">Deleted At</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="items.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.sale.items">Items</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (sale of sales(); track trackId(sale)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/sale', sale.id, 'view']">{{ sale.id }}</a>
+              </td>
+              <td>{{ sale.saleDate | formatMediumDatetime }}</td>
+              <td>{{ sale.saleNumber }}</td>
+              <td [jhiTranslate]="'greatErpApp.SaleStatus.' + (sale.status ?? 'null')">
+                {{ { null: '', OPEN: 'OPEN', CONFIRMED: 'CONFIRMED', INVOICED: 'INVOICED', CANCELED: 'CANCELED' }[sale.status ?? 'null'] }}
+              </td>
+              <td>{{ sale.grossAmount }}</td>
+              <td>{{ sale.discountAmount }}</td>
+              <td>{{ sale.netAmount }}</td>
+              <td>{{ sale.notes }}</td>
+              <td>{{ sale.deletedAt | formatMediumDatetime }}</td>
+              <td>
+                @if (sale.items) {
+                  <div>
+                    <a [routerLink]="['/sale-item', sale.items.id, 'view']">{{ sale.items.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/tenant']"
+                    [queryParams]="{ 'filter[salesId.in]': sale.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('greatErpApp.sale.tenant' | translate) }"
+                      >Mostrar Tenant</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/warehouse']"
+                    [queryParams]="{ 'filter[salesId.in]': sale.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('greatErpApp.sale.warehouse' | translate) }"
+                      >Mostrar Warehouse</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/customer']"
+                    [queryParams]="{ 'filter[salesId.in]': sale.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('greatErpApp.sale.customer' | translate) }"
+                      >Mostrar Customer</span
+                    >
+                  </button>
+                  <a [routerLink]="['/sale', sale.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+                  </a>
+
+                  <a [routerLink]="['/sale', sale.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(sale)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (sales().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

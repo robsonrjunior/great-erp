@@ -1,0 +1,11 @@
+{
+  "greatErpApp": {
+    "MovementType": {
+      "null": "",
+      "INBOUND": "INBOUND",
+      "OUTBOUND": "OUTBOUND",
+      "ADJUSTMENT": "ADJUSTMENT",
+      "TRANSFER": "TRANSFER"
+    }
+  }
+}

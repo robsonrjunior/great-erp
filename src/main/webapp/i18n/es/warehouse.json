@@ -1,0 +1,32 @@
+{
+  "greatErpApp": {
+    "warehouse": {
+      "home": {
+        "title": "Warehouses",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Warehouse",
+        "createOrEditLabel": "Crear o editar Warehouse",
+        "search": "Buscar Warehouse",
+        "notFound": "Ningún Warehouses encontrado"
+      },
+      "created": "Un nuevo Warehouse ha sido creado con el identificador {{ param }}",
+      "updated": "Un Warehouse ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Warehouse ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Warehouse {{ id }}?"
+      },
+      "detail": {
+        "title": "Warehouse"
+      },
+      "id": "ID",
+      "name": "Name",
+      "code": "Code",
+      "active": "Active",
+      "deletedAt": "Deleted At",
+      "stockMovements": "Stock Movements",
+      "sales": "Sales",
+      "tenant": "Tenant",
+      "city": "City"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "greatErpApp": {
+    "PartyType": {
+      "null": "",
+      "PERSON": "PERSON",
+      "COMPANY": "COMPANY"
+    }
+  }
+}

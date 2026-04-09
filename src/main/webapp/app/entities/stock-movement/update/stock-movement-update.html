@@ -1,0 +1,186 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-stock-movement-heading"
+        data-cy="StockMovementCreateUpdateHeading"
+        jhiTranslate="greatErpApp.stockMovement.home.createOrEditLabel"
+      >
+        Criar ou editar Stock Movement
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">Código</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let movementDateRef = editForm.get('movementDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_movementDate" jhiTranslate="greatErpApp.stockMovement.movementDate">Movement Date</label>
+          <div class="d-flex">
+            <input
+              id="field_movementDate"
+              data-cy="movementDate"
+              type="datetime-local"
+              class="form-control"
+              name="movementDate"
+              formControlName="movementDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (movementDateRef.invalid && (movementDateRef.dirty || movementDateRef.touched)) {
+            <div>
+              @if (editForm.get('movementDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('movementDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >Este campo é do tipo data/hora.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let movementTypeRef = editForm.get('movementType')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_movementType" jhiTranslate="greatErpApp.stockMovement.movementType">Movement Type</label>
+          <select class="form-control" name="movementType" formControlName="movementType" id="field_movementType" data-cy="movementType">
+            <option [ngValue]="null">{{ 'greatErpApp.MovementType.null' | translate }}</option>
+            @for (movementType of movementTypeValues; track $index) {
+              <option [value]="movementType">{{ 'greatErpApp.MovementType.' + movementType | translate }}</option>
+            }
+          </select>
+          @if (movementTypeRef.invalid && (movementTypeRef.dirty || movementTypeRef.touched)) {
+            <div>
+              @if (editForm.get('movementType')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let quantityRef = editForm.get('quantity')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_quantity" jhiTranslate="greatErpApp.stockMovement.quantity">Quantity</label>
+          <input type="number" class="form-control" name="quantity" id="field_quantity" data-cy="quantity" formControlName="quantity" />
+          @if (quantityRef.invalid && (quantityRef.dirty || quantityRef.touched)) {
+            <div>
+              @if (editForm.get('quantity')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+              @if (editForm.get('quantity')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >Este campo deve ser maior que 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('quantity')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >Este campo é do tipo numérico.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let unitCostRef = editForm.get('unitCost')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_unitCost" jhiTranslate="greatErpApp.stockMovement.unitCost">Unit Cost</label>
+          <input type="number" class="form-control" name="unitCost" id="field_unitCost" data-cy="unitCost" formControlName="unitCost" />
+          @if (unitCostRef.invalid && (unitCostRef.dirty || unitCostRef.touched)) {
+            <div>
+              @if (editForm.get('unitCost')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >Este campo deve ser maior que 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('unitCost')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >Este campo é do tipo numérico.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let referenceNumberRef = editForm.get('referenceNumber')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_referenceNumber" jhiTranslate="greatErpApp.stockMovement.referenceNumber"
+            >Reference Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="referenceNumber"
+            id="field_referenceNumber"
+            data-cy="referenceNumber"
+            formControlName="referenceNumber"
+          />
+          @if (referenceNumberRef.invalid && (referenceNumberRef.dirty || referenceNumberRef.touched)) {
+            <div>
+              @if (editForm.get('referenceNumber')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '60' }"
+                  >Este campo não pode ter mais de 60 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let notesRef = editForm.get('notes')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_notes" jhiTranslate="greatErpApp.stockMovement.notes">Notes</label>
+          <input type="text" class="form-control" name="notes" id="field_notes" data-cy="notes" formControlName="notes" />
+          @if (notesRef.invalid && (notesRef.dirty || notesRef.touched)) {
+            <div>
+              @if (editForm.get('notes')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '500' }"
+                  >Este campo não pode ter mais de 500 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_deletedAt" jhiTranslate="greatErpApp.stockMovement.deletedAt">Deleted At</label>
+          <div class="d-flex">
+            <input
+              id="field_deletedAt"
+              data-cy="deletedAt"
+              type="datetime-local"
+              class="form-control"
+              name="deletedAt"
+              formControlName="deletedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Salvar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

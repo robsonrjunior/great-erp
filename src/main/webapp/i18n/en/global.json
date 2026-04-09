@@ -8,7 +8,20 @@
       "entities": {
         "main": "Entities",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority"
+        "tenant": "Tenant",
+        "country": "Country",
+        "state": "State",
+        "city": "City",
+        "supplier": "Supplier",
+        "customer": "Customer",
+        "person": "Person",
+        "company": "Company",
+        "product": "Product",
+        "rawMaterial": "Raw Material",
+        "warehouse": "Warehouse",
+        "stockMovement": "Stock Movement",
+        "sale": "Sale",
+        "saleItem": "Sale Item"
       },
       "account": {
         "main": "Account",

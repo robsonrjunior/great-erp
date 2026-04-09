@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (rawMaterial(); as rawMaterialRef) {
+      <div>
+        <h2 data-cy="rawMaterialDetailsHeading"><span jhiTranslate="greatErpApp.rawMaterial.detail.title">Raw Material</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ rawMaterialRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.rawMaterial.name">Name</span></dt>
+          <dd>
+            <span>{{ rawMaterialRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.rawMaterial.sku">Sku</span></dt>
+          <dd>
+            <span>{{ rawMaterialRef.sku }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.rawMaterial.unitOfMeasure">Unit Of Measure</span></dt>
+          <dd>
+            <span [jhiTranslate]="'greatErpApp.UnitOfMeasure.' + (rawMaterialRef.unitOfMeasure ?? 'null')">{{
+              { null: '', UNIT: 'UNIT', KG: 'KG', LITER: 'LITER', METER: 'METER', BOX: 'BOX' }[rawMaterialRef.unitOfMeasure ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.rawMaterial.unitDecimalPlaces">Unit Decimal Places</span></dt>
+          <dd>
+            <span>{{ rawMaterialRef.unitDecimalPlaces }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.rawMaterial.unitCost">Unit Cost</span></dt>
+          <dd>
+            <span>{{ rawMaterialRef.unitCost }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.rawMaterial.minStock">Min Stock</span></dt>
+          <dd>
+            <span>{{ rawMaterialRef.minStock }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.rawMaterial.active">Active</span></dt>
+          <dd>
+            <span>{{ rawMaterialRef.active }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.rawMaterial.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ rawMaterialRef.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.rawMaterial.stockMovements">Stock Movements</span></dt>
+          <dd>
+            @if (rawMaterial()!.stockMovements) {
+              <div>
+                <a [routerLink]="['/stock-movement', rawMaterial()!.stockMovements?.id, 'view']">{{ rawMaterialRef.stockMovements?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/raw-material', rawMaterialRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

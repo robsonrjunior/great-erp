@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (person(); as personRef) {
+      <div>
+        <h2 data-cy="personDetailsHeading"><span jhiTranslate="greatErpApp.person.detail.title">Person</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ personRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.person.fullName">Full Name</span></dt>
+          <dd>
+            <span>{{ personRef.fullName }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.person.cpf">Cpf</span></dt>
+          <dd>
+            <span>{{ personRef.cpf }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.person.birthDate">Birth Date</span></dt>
+          <dd>
+            <span>{{ personRef.birthDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.person.email">Email</span></dt>
+          <dd>
+            <span>{{ personRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.person.phone">Phone</span></dt>
+          <dd>
+            <span>{{ personRef.phone }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.person.active">Active</span></dt>
+          <dd>
+            <span>{{ personRef.active }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.person.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ personRef.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/person', personRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (state(); as stateRef) {
+      <div>
+        <h2 data-cy="stateDetailsHeading"><span jhiTranslate="greatErpApp.state.detail.title">State</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ stateRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.state.name">Name</span></dt>
+          <dd>
+            <span>{{ stateRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.state.code">Code</span></dt>
+          <dd>
+            <span>{{ stateRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.state.country">Country</span></dt>
+          <dd>
+            @if (state()!.country) {
+              <div>
+                <a [routerLink]="['/country', state()!.country?.id, 'view']">{{ stateRef.country?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/state', stateRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

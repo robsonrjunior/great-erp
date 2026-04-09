@@ -1,0 +1,24 @@
+@if (tenant) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(tenant.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="tenantDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirme a exclusão</h4>
+    </div>
+
+    <div class="modal-body">
+      <jhi-alert-error />
+      <p id="jhi-delete-tenant-heading" jhiTranslate="greatErpApp.tenant.delete.question" [translateValues]="{ id: tenant.id }">
+        Tem certeza de que deseja excluir Tenant {{ tenant.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+      </button>
+
+      <button id="jhi-confirm-delete-tenant" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times" />&nbsp;<span jhiTranslate="entity.action.delete">Excluir</span>
+      </button>
+    </div>
+  </form>
+}

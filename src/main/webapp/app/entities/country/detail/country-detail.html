@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (country(); as countryRef) {
+      <div>
+        <h2 data-cy="countryDetailsHeading"><span jhiTranslate="greatErpApp.country.detail.title">Country</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ countryRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.country.name">Name</span></dt>
+          <dd>
+            <span>{{ countryRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.country.isoCode">Iso Code</span></dt>
+          <dd>
+            <span>{{ countryRef.isoCode }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/country', countryRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

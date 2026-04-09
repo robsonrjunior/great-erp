@@ -1,0 +1,36 @@
+{
+  "greatErpApp": {
+    "sale": {
+      "home": {
+        "title": "Sales",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Sale",
+        "createOrEditLabel": "Crear o editar Sale",
+        "search": "Buscar Sale",
+        "notFound": "Ningún Sales encontrado"
+      },
+      "created": "Un nuevo Sale ha sido creado con el identificador {{ param }}",
+      "updated": "Un Sale ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Sale ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Sale {{ id }}?"
+      },
+      "detail": {
+        "title": "Sale"
+      },
+      "id": "ID",
+      "saleDate": "Sale Date",
+      "saleNumber": "Sale Number",
+      "status": "Status",
+      "grossAmount": "Gross Amount",
+      "discountAmount": "Discount Amount",
+      "netAmount": "Net Amount",
+      "notes": "Notes",
+      "deletedAt": "Deleted At",
+      "items": "Items",
+      "tenant": "Tenant",
+      "warehouse": "Warehouse",
+      "customer": "Customer"
+    }
+  }
+}

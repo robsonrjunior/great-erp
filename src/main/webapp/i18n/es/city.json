@@ -1,0 +1,31 @@
+{
+  "greatErpApp": {
+    "city": {
+      "home": {
+        "title": "Cities",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo City",
+        "createOrEditLabel": "Crear o editar City",
+        "search": "Buscar City",
+        "notFound": "Ningún Cities encontrado"
+      },
+      "created": "Un nuevo City ha sido creado con el identificador {{ param }}",
+      "updated": "Un City ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un City ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar City {{ id }}?"
+      },
+      "detail": {
+        "title": "City"
+      },
+      "id": "ID",
+      "name": "Name",
+      "suppliers": "Suppliers",
+      "customers": "Customers",
+      "people": "People",
+      "companies": "Companies",
+      "warehouses": "Warehouses",
+      "state": "State"
+    }
+  }
+}

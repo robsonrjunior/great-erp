@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (warehouse(); as warehouseRef) {
+      <div>
+        <h2 data-cy="warehouseDetailsHeading"><span jhiTranslate="greatErpApp.warehouse.detail.title">Warehouse</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ warehouseRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.warehouse.name">Name</span></dt>
+          <dd>
+            <span>{{ warehouseRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.warehouse.code">Code</span></dt>
+          <dd>
+            <span>{{ warehouseRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.warehouse.active">Active</span></dt>
+          <dd>
+            <span>{{ warehouseRef.active }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.warehouse.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ warehouseRef.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.warehouse.stockMovements">Stock Movements</span></dt>
+          <dd>
+            @if (warehouse()!.stockMovements) {
+              <div>
+                <a [routerLink]="['/stock-movement', warehouse()!.stockMovements?.id, 'view']">{{ warehouseRef.stockMovements?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.warehouse.sales">Sales</span></dt>
+          <dd>
+            @if (warehouse()!.sales) {
+              <div>
+                <a [routerLink]="['/sale', warehouse()!.sales?.id, 'view']">{{ warehouseRef.sales?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/warehouse', warehouseRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

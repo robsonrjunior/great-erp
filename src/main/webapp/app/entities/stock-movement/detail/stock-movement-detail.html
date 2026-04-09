@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (stockMovement(); as stockMovementRef) {
+      <div>
+        <h2 data-cy="stockMovementDetailsHeading"><span jhiTranslate="greatErpApp.stockMovement.detail.title">Stock Movement</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ stockMovementRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.stockMovement.movementDate">Movement Date</span></dt>
+          <dd>
+            <span>{{ stockMovementRef.movementDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.stockMovement.movementType">Movement Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'greatErpApp.MovementType.' + (stockMovementRef.movementType ?? 'null')">{{
+              { null: '', INBOUND: 'INBOUND', OUTBOUND: 'OUTBOUND', ADJUSTMENT: 'ADJUSTMENT', TRANSFER: 'TRANSFER' }[
+                stockMovementRef.movementType ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.stockMovement.quantity">Quantity</span></dt>
+          <dd>
+            <span>{{ stockMovementRef.quantity }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.stockMovement.unitCost">Unit Cost</span></dt>
+          <dd>
+            <span>{{ stockMovementRef.unitCost }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.stockMovement.referenceNumber">Reference Number</span></dt>
+          <dd>
+            <span>{{ stockMovementRef.referenceNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.stockMovement.notes">Notes</span></dt>
+          <dd>
+            <span>{{ stockMovementRef.notes }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.stockMovement.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ stockMovementRef.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/stock-movement', stockMovementRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

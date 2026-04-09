@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (customer(); as customerRef) {
+      <div>
+        <h2 data-cy="customerDetailsHeading"><span jhiTranslate="greatErpApp.customer.detail.title">Customer</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ customerRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.customer.legalName">Legal Name</span></dt>
+          <dd>
+            <span>{{ customerRef.legalName }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.customer.tradeName">Trade Name</span></dt>
+          <dd>
+            <span>{{ customerRef.tradeName }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.customer.taxId">Tax Id</span></dt>
+          <dd>
+            <span>{{ customerRef.taxId }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.customer.partyType">Party Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'greatErpApp.PartyType.' + (customerRef.partyType ?? 'null')">{{
+              { null: '', PERSON: 'PERSON', COMPANY: 'COMPANY' }[customerRef.partyType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.customer.email">Email</span></dt>
+          <dd>
+            <span>{{ customerRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.customer.phone">Phone</span></dt>
+          <dd>
+            <span>{{ customerRef.phone }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.customer.active">Active</span></dt>
+          <dd>
+            <span>{{ customerRef.active }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.customer.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ customerRef.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.customer.person">Person</span></dt>
+          <dd>
+            @if (customer()!.person) {
+              <div>
+                <a [routerLink]="['/person', customer()!.person?.id, 'view']">{{ customerRef.person?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.customer.company">Company</span></dt>
+          <dd>
+            @if (customer()!.company) {
+              <div>
+                <a [routerLink]="['/company', customer()!.company?.id, 'view']">{{ customerRef.company?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.customer.sales">Sales</span></dt>
+          <dd>
+            @if (customer()!.sales) {
+              <div>
+                <a [routerLink]="['/sale', customer()!.sales?.id, 'view']">{{ customerRef.sales?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/customer', customerRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

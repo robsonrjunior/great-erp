@@ -1,0 +1,12 @@
+{
+  "greatErpApp": {
+    "UnitOfMeasure": {
+      "null": "",
+      "UNIT": "UNIT",
+      "KG": "KG",
+      "LITER": "LITER",
+      "METER": "METER",
+      "BOX": "BOX"
+    }
+  }
+}

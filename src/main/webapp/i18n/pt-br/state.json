@@ -1,0 +1,28 @@
+{
+  "greatErpApp": {
+    "state": {
+      "home": {
+        "title": "States",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo State",
+        "createOrEditLabel": "Criar ou editar State",
+        "search": "Pesquisar por State",
+        "notFound": "Nenhum State encontrado"
+      },
+      "created": "Um novo State foi criado com o identificador {{ param }}",
+      "updated": "Um State foi atualizado com o identificador {{ param }}",
+      "deleted": "Um State foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir State {{ id }}?"
+      },
+      "detail": {
+        "title": "State"
+      },
+      "id": "ID",
+      "name": "Name",
+      "code": "Code",
+      "cities": "Cities",
+      "country": "Country"
+    }
+  }
+}

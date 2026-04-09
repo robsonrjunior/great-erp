@@ -1,0 +1,85 @@
+{
+  "annotations": {
+    "changelogDate": "20260409002050"
+  },
+  "applications": ["*"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "120",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "sku",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "40",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "unitOfMeasure",
+      "fieldType": "UnitOfMeasure",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "UNIT,KG,LITER,METER,BOX"
+    },
+    {
+      "fieldName": "unitDecimalPlaces",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "6",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "unitCost",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "minStock",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "RawMaterial",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "stockMovement",
+      "otherEntityRelationshipName": "rawMaterial",
+      "relationshipName": "stockMovements",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "tenant",
+      "otherEntityRelationshipName": "rawMaterials",
+      "relationshipName": "tenant",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "supplier",
+      "otherEntityRelationshipName": "rawMaterials",
+      "relationshipName": "primarySupplier",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

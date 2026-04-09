@@ -1,0 +1,273 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-tenant-heading" data-cy="TenantCreateUpdateHeading" jhiTranslate="greatErpApp.tenant.home.createOrEditLabel">
+        Criar ou editar Tenant
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">Código</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nameRef = editForm.get('name')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_name" jhiTranslate="greatErpApp.tenant.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (nameRef.invalid && (nameRef.dirty || nameRef.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+              @if (editForm.get('name')?.errors?.minlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: '2' }"
+                  >Este campo deve ter pelo menos 2 caracteres.</small
+                >
+              }
+              @if (editForm.get('name')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >Este campo não pode ter mais de 100 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let codeRef = editForm.get('code')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_code" jhiTranslate="greatErpApp.tenant.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          @if (codeRef.invalid && (codeRef.dirty || codeRef.touched)) {
+            <div>
+              @if (editForm.get('code')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+              @if (editForm.get('code')?.errors?.minlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: '2' }"
+                  >Este campo deve ter pelo menos 2 caracteres.</small
+                >
+              }
+              @if (editForm.get('code')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '30' }"
+                  >Este campo não pode ter mais de 30 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let activeRef = editForm.get('active')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_active" jhiTranslate="greatErpApp.tenant.active">Active</label>
+          <input type="checkbox" class="form-check" name="active" id="field_active" data-cy="active" formControlName="active" />
+          @if (activeRef.invalid && (activeRef.dirty || activeRef.touched)) {
+            <div>
+              @if (editForm.get('active')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_deletedAt" jhiTranslate="greatErpApp.tenant.deletedAt">Deleted At</label>
+          <div class="d-flex">
+            <input
+              id="field_deletedAt"
+              data-cy="deletedAt"
+              type="datetime-local"
+              class="form-control"
+              name="deletedAt"
+              formControlName="deletedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_customers" jhiTranslate="greatErpApp.tenant.customers">Customers</label>
+          <select
+            class="form-control"
+            id="field_customers"
+            data-cy="customers"
+            name="customers"
+            formControlName="customers"
+            [compareWith]="compareCustomer"
+          >
+            <option [ngValue]="null"></option>
+            @for (customerOption of customersSharedCollection(); track $index) {
+              <option [ngValue]="customerOption">{{ customerOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_suppliers" jhiTranslate="greatErpApp.tenant.suppliers">Suppliers</label>
+          <select
+            class="form-control"
+            id="field_suppliers"
+            data-cy="suppliers"
+            name="suppliers"
+            formControlName="suppliers"
+            [compareWith]="compareSupplier"
+          >
+            <option [ngValue]="null"></option>
+            @for (supplierOption of suppliersSharedCollection(); track $index) {
+              <option [ngValue]="supplierOption">{{ supplierOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_people" jhiTranslate="greatErpApp.tenant.people">People</label>
+          <select
+            class="form-control"
+            id="field_people"
+            data-cy="people"
+            name="people"
+            formControlName="people"
+            [compareWith]="comparePerson"
+          >
+            <option [ngValue]="null"></option>
+            @for (personOption of peopleSharedCollection(); track $index) {
+              <option [ngValue]="personOption">{{ personOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_companies" jhiTranslate="greatErpApp.tenant.companies">Companies</label>
+          <select
+            class="form-control"
+            id="field_companies"
+            data-cy="companies"
+            name="companies"
+            formControlName="companies"
+            [compareWith]="compareCompany"
+          >
+            <option [ngValue]="null"></option>
+            @for (companyOption of companiesSharedCollection(); track $index) {
+              <option [ngValue]="companyOption">{{ companyOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_products" jhiTranslate="greatErpApp.tenant.products">Products</label>
+          <select
+            class="form-control"
+            id="field_products"
+            data-cy="products"
+            name="products"
+            formControlName="products"
+            [compareWith]="compareProduct"
+          >
+            <option [ngValue]="null"></option>
+            @for (productOption of productsSharedCollection(); track $index) {
+              <option [ngValue]="productOption">{{ productOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_rawMaterials" jhiTranslate="greatErpApp.tenant.rawMaterials">Raw Materials</label>
+          <select
+            class="form-control"
+            id="field_rawMaterials"
+            data-cy="rawMaterials"
+            name="rawMaterials"
+            formControlName="rawMaterials"
+            [compareWith]="compareRawMaterial"
+          >
+            <option [ngValue]="null"></option>
+            @for (rawMaterialOption of rawMaterialsSharedCollection(); track $index) {
+              <option [ngValue]="rawMaterialOption">{{ rawMaterialOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_warehouses" jhiTranslate="greatErpApp.tenant.warehouses">Warehouses</label>
+          <select
+            class="form-control"
+            id="field_warehouses"
+            data-cy="warehouses"
+            name="warehouses"
+            formControlName="warehouses"
+            [compareWith]="compareWarehouse"
+          >
+            <option [ngValue]="null"></option>
+            @for (warehouseOption of warehousesSharedCollection(); track $index) {
+              <option [ngValue]="warehouseOption">{{ warehouseOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sales" jhiTranslate="greatErpApp.tenant.sales">Sales</label>
+          <select class="form-control" id="field_sales" data-cy="sales" name="sales" formControlName="sales" [compareWith]="compareSale">
+            <option [ngValue]="null"></option>
+            @for (saleOption of salesSharedCollection(); track $index) {
+              <option [ngValue]="saleOption">{{ saleOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_saleItems" jhiTranslate="greatErpApp.tenant.saleItems">Sale Items</label>
+          <select
+            class="form-control"
+            id="field_saleItems"
+            data-cy="saleItems"
+            name="saleItems"
+            formControlName="saleItems"
+            [compareWith]="compareSaleItem"
+          >
+            <option [ngValue]="null"></option>
+            @for (saleItemOption of saleItemsSharedCollection(); track $index) {
+              <option [ngValue]="saleItemOption">{{ saleItemOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_stockMovements" jhiTranslate="greatErpApp.tenant.stockMovements">Stock Movements</label>
+          <select
+            class="form-control"
+            id="field_stockMovements"
+            data-cy="stockMovements"
+            name="stockMovements"
+            formControlName="stockMovements"
+            [compareWith]="compareStockMovement"
+          >
+            <option [ngValue]="null"></option>
+            @for (stockMovementOption of stockMovementsSharedCollection(); track $index) {
+              <option [ngValue]="stockMovementOption">{{ stockMovementOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Salvar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

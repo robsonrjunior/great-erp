@@ -1,0 +1,85 @@
+{
+  "annotations": {
+    "changelogDate": "20260409002052"
+  },
+  "applications": ["*"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "movementDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "movementType",
+      "fieldType": "MovementType",
+      "fieldTypeDocumentation": "ERP Core Domain (English naming)\\nJHipster 9 compatible baseline for a multi-tenant ERP.",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "INBOUND,OUTBOUND,ADJUSTMENT,TRANSFER"
+    },
+    {
+      "fieldName": "quantity",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0.000001"
+    },
+    {
+      "fieldName": "unitCost",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "referenceNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "60"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "StockMovement",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "tenant",
+      "otherEntityRelationshipName": "stockMovements",
+      "relationshipName": "tenant",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "warehouse",
+      "otherEntityRelationshipName": "stockMovements",
+      "relationshipName": "warehouse",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "stockMovements",
+      "relationshipName": "product",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "rawMaterial",
+      "otherEntityRelationshipName": "stockMovements",
+      "relationshipName": "rawMaterial",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

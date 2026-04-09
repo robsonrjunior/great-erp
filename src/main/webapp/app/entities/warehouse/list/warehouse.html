@@ -1,0 +1,213 @@
+<div>
+  <h2 id="page-heading" data-cy="WarehouseHeading">
+    <span jhiTranslate="greatErpApp.warehouse.home.title">Warehouses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="greatErpApp.warehouse.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-warehouse"
+        [routerLink]="['/warehouse/new']"
+      >
+        <fa-icon icon="plus" />
+        <span class="hidden-sm-down" jhiTranslate="greatErpApp.warehouse.home.createLabel">Criar novo Warehouse</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="greatErpApp.warehouse.home.search">Pesquisar por Warehouse</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'greatErpApp.warehouse.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch())">
+          <fa-icon icon="search" />
+        </button>
+
+        @if (currentSearch()) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt" />
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  <jhi-filter [filters]="filters" />
+
+  @if (warehouses().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="greatErpApp.warehouse.home.notFound">Nenhum Warehouse encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">Código</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.warehouse.name">Name</span>
+                @if (!currentSearch()) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="code">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.warehouse.code">Code</span>
+                @if (!currentSearch()) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="active">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.warehouse.active">Active</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedAt">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.warehouse.deletedAt">Deleted At</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="stockMovements.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.warehouse.stockMovements">Stock Movements</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sales.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.warehouse.sales">Sales</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (warehouse of warehouses(); track trackId(warehouse)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/warehouse', warehouse.id, 'view']">{{ warehouse.id }}</a>
+              </td>
+              <td>{{ warehouse.name }}</td>
+              <td>{{ warehouse.code }}</td>
+              <td>{{ warehouse.active }}</td>
+              <td>{{ warehouse.deletedAt | formatMediumDatetime }}</td>
+              <td>
+                @if (warehouse.stockMovements) {
+                  <div>
+                    <a [routerLink]="['/stock-movement', warehouse.stockMovements.id, 'view']">{{ warehouse.stockMovements.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (warehouse.sales) {
+                  <div>
+                    <a [routerLink]="['/sale', warehouse.sales.id, 'view']">{{ warehouse.sales.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/tenant']"
+                    [queryParams]="{ 'filter[warehousesId.in]': warehouse.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('greatErpApp.warehouse.tenant' | translate) }"
+                      >Mostrar Tenant</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/city']"
+                    [queryParams]="{ 'filter[warehousesId.in]': warehouse.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('greatErpApp.warehouse.city' | translate) }"
+                      >Mostrar City</span
+                    >
+                  </button>
+                  <a [routerLink]="['/warehouse', warehouse.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+                  </a>
+
+                  <a [routerLink]="['/warehouse', warehouse.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(warehouse)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (warehouses().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

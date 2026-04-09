@@ -1,0 +1,32 @@
+{
+  "greatErpApp": {
+    "warehouse": {
+      "home": {
+        "title": "Warehouses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Warehouse",
+        "createOrEditLabel": "Create or edit a Warehouse",
+        "search": "Search for Warehouse",
+        "notFound": "No Warehouses found"
+      },
+      "created": "A new Warehouse is created with identifier {{ param }}",
+      "updated": "A Warehouse is updated with identifier {{ param }}",
+      "deleted": "A Warehouse is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Warehouse {{ id }}?"
+      },
+      "detail": {
+        "title": "Warehouse"
+      },
+      "id": "ID",
+      "name": "Name",
+      "code": "Code",
+      "active": "Active",
+      "deletedAt": "Deleted At",
+      "stockMovements": "Stock Movements",
+      "sales": "Sales",
+      "tenant": "Tenant",
+      "city": "City"
+    }
+  }
+}

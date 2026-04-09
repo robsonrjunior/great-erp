@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Tenant.
+    -->
+    <changeSet id="20260409002041-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="customers_id"
+                                 baseTableName="tenant"
+                                 constraintName="fk_tenant__customers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="suppliers_id"
+                                 baseTableName="tenant"
+                                 constraintName="fk_tenant__suppliers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="supplier"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="people_id"
+                                 baseTableName="tenant"
+                                 constraintName="fk_tenant__people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="companies_id"
+                                 baseTableName="tenant"
+                                 constraintName="fk_tenant__companies_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="products_id"
+                                 baseTableName="tenant"
+                                 constraintName="fk_tenant__products_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="raw_materials_id"
+                                 baseTableName="tenant"
+                                 constraintName="fk_tenant__raw_materials_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="raw_material"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="warehouses_id"
+                                 baseTableName="tenant"
+                                 constraintName="fk_tenant__warehouses_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="warehouse"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="sales_id"
+                                 baseTableName="tenant"
+                                 constraintName="fk_tenant__sales_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sale"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="sale_items_id"
+                                 baseTableName="tenant"
+                                 constraintName="fk_tenant__sale_items_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sale_item"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="stock_movements_id"
+                                 baseTableName="tenant"
+                                 constraintName="fk_tenant__stock_movements_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="stock_movement"
+                                 />
+    </changeSet>
+</databaseChangeLog>

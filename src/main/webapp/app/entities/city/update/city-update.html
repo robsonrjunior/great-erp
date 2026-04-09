@@ -1,0 +1,163 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-city-heading" data-cy="CityCreateUpdateHeading" jhiTranslate="greatErpApp.city.home.createOrEditLabel">
+        Criar ou editar City
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">Código</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nameRef = editForm.get('name')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_name" jhiTranslate="greatErpApp.city.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (nameRef.invalid && (nameRef.dirty || nameRef.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+              @if (editForm.get('name')?.errors?.minlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: '2' }"
+                  >Este campo deve ter pelo menos 2 caracteres.</small
+                >
+              }
+              @if (editForm.get('name')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >Este campo não pode ter mais de 100 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_suppliers" jhiTranslate="greatErpApp.city.suppliers">Suppliers</label>
+          <select
+            class="form-control"
+            id="field_suppliers"
+            data-cy="suppliers"
+            name="suppliers"
+            formControlName="suppliers"
+            [compareWith]="compareSupplier"
+          >
+            <option [ngValue]="null"></option>
+            @for (supplierOption of suppliersSharedCollection(); track $index) {
+              <option [ngValue]="supplierOption">{{ supplierOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_customers" jhiTranslate="greatErpApp.city.customers">Customers</label>
+          <select
+            class="form-control"
+            id="field_customers"
+            data-cy="customers"
+            name="customers"
+            formControlName="customers"
+            [compareWith]="compareCustomer"
+          >
+            <option [ngValue]="null"></option>
+            @for (customerOption of customersSharedCollection(); track $index) {
+              <option [ngValue]="customerOption">{{ customerOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_people" jhiTranslate="greatErpApp.city.people">People</label>
+          <select
+            class="form-control"
+            id="field_people"
+            data-cy="people"
+            name="people"
+            formControlName="people"
+            [compareWith]="comparePerson"
+          >
+            <option [ngValue]="null"></option>
+            @for (personOption of peopleSharedCollection(); track $index) {
+              <option [ngValue]="personOption">{{ personOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_companies" jhiTranslate="greatErpApp.city.companies">Companies</label>
+          <select
+            class="form-control"
+            id="field_companies"
+            data-cy="companies"
+            name="companies"
+            formControlName="companies"
+            [compareWith]="compareCompany"
+          >
+            <option [ngValue]="null"></option>
+            @for (companyOption of companiesSharedCollection(); track $index) {
+              <option [ngValue]="companyOption">{{ companyOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_warehouses" jhiTranslate="greatErpApp.city.warehouses">Warehouses</label>
+          <select
+            class="form-control"
+            id="field_warehouses"
+            data-cy="warehouses"
+            name="warehouses"
+            formControlName="warehouses"
+            [compareWith]="compareWarehouse"
+          >
+            <option [ngValue]="null"></option>
+            @for (warehouseOption of warehousesSharedCollection(); track $index) {
+              <option [ngValue]="warehouseOption">{{ warehouseOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_state" jhiTranslate="greatErpApp.city.state">State</label>
+          <select class="form-control" id="field_state" data-cy="state" name="state" formControlName="state" [compareWith]="compareState">
+            @if (editForm.get(['state'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (stateOption of statesSharedCollection(); track $index) {
+              <option [ngValue]="stateOption">{{ stateOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['state'])!.invalid && (editForm.get(['state'])!.dirty || editForm.get(['state'])!.touched)) {
+          <div>
+            @if (editForm.get(['state'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Salvar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

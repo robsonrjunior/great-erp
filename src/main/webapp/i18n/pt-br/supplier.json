@@ -1,0 +1,37 @@
+{
+  "greatErpApp": {
+    "supplier": {
+      "home": {
+        "title": "Suppliers",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Supplier",
+        "createOrEditLabel": "Criar ou editar Supplier",
+        "search": "Pesquisar por Supplier",
+        "notFound": "Nenhum Supplier encontrado"
+      },
+      "created": "Um novo Supplier foi criado com o identificador {{ param }}",
+      "updated": "Um Supplier foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Supplier foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Supplier {{ id }}?"
+      },
+      "detail": {
+        "title": "Supplier"
+      },
+      "id": "ID",
+      "legalName": "Legal Name",
+      "tradeName": "Trade Name",
+      "taxId": "Tax Id",
+      "partyType": "Party Type",
+      "email": "Email",
+      "phone": "Phone",
+      "active": "Active",
+      "deletedAt": "Deleted At",
+      "person": "Person",
+      "company": "Company",
+      "rawMaterials": "Raw Materials",
+      "tenant": "Tenant",
+      "city": "City"
+    }
+  }
+}

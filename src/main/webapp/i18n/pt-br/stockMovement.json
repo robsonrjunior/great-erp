@@ -1,0 +1,35 @@
+{
+  "greatErpApp": {
+    "stockMovement": {
+      "home": {
+        "title": "Stock Movements",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Stock Movement",
+        "createOrEditLabel": "Criar ou editar Stock Movement",
+        "search": "Pesquisar por Stock Movement",
+        "notFound": "Nenhum Stock Movement encontrado"
+      },
+      "created": "Um novo Stock Movement foi criado com o identificador {{ param }}",
+      "updated": "Um Stock Movement foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Stock Movement foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Stock Movement {{ id }}?"
+      },
+      "detail": {
+        "title": "Stock Movement"
+      },
+      "id": "ID",
+      "movementDate": "Movement Date",
+      "movementType": "Movement Type",
+      "quantity": "Quantity",
+      "unitCost": "Unit Cost",
+      "referenceNumber": "Reference Number",
+      "notes": "Notes",
+      "deletedAt": "Deleted At",
+      "tenant": "Tenant",
+      "warehouse": "Warehouse",
+      "product": "Product",
+      "rawMaterial": "Raw Material"
+    }
+  }
+}

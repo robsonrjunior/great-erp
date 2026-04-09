@@ -1,0 +1,24 @@
+@if (saleItem) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(saleItem.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="saleItemDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirme a exclusão</h4>
+    </div>
+
+    <div class="modal-body">
+      <jhi-alert-error />
+      <p id="jhi-delete-saleItem-heading" jhiTranslate="greatErpApp.saleItem.delete.question" [translateValues]="{ id: saleItem.id }">
+        Tem certeza de que deseja excluir Sale Item {{ saleItem.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+      </button>
+
+      <button id="jhi-confirm-delete-saleItem" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times" />&nbsp;<span jhiTranslate="entity.action.delete">Excluir</span>
+      </button>
+    </div>
+  </form>
+}

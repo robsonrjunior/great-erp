@@ -1,0 +1,36 @@
+{
+  "greatErpApp": {
+    "company": {
+      "home": {
+        "title": "Companies",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Company",
+        "createOrEditLabel": "Crear o editar Company",
+        "search": "Buscar Company",
+        "notFound": "Ningún Companies encontrado"
+      },
+      "created": "Un nuevo Company ha sido creado con el identificador {{ param }}",
+      "updated": "Un Company ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Company ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Company {{ id }}?"
+      },
+      "detail": {
+        "title": "Company"
+      },
+      "id": "ID",
+      "legalName": "Legal Name",
+      "tradeName": "Trade Name",
+      "cnpj": "Cnpj",
+      "stateRegistration": "State Registration",
+      "email": "Email",
+      "phone": "Phone",
+      "active": "Active",
+      "deletedAt": "Deleted At",
+      "customer": "Customer",
+      "supplier": "Supplier",
+      "tenant": "Tenant",
+      "city": "City"
+    }
+  }
+}

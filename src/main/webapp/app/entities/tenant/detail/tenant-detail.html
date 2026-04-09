@@ -1,0 +1,126 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (tenant(); as tenantRef) {
+      <div>
+        <h2 data-cy="tenantDetailsHeading"><span jhiTranslate="greatErpApp.tenant.detail.title">Tenant</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ tenantRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.name">Name</span></dt>
+          <dd>
+            <span>{{ tenantRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.code">Code</span></dt>
+          <dd>
+            <span>{{ tenantRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.active">Active</span></dt>
+          <dd>
+            <span>{{ tenantRef.active }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ tenantRef.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.customers">Customers</span></dt>
+          <dd>
+            @if (tenant()!.customers) {
+              <div>
+                <a [routerLink]="['/customer', tenant()!.customers?.id, 'view']">{{ tenantRef.customers?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.suppliers">Suppliers</span></dt>
+          <dd>
+            @if (tenant()!.suppliers) {
+              <div>
+                <a [routerLink]="['/supplier', tenant()!.suppliers?.id, 'view']">{{ tenantRef.suppliers?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.people">People</span></dt>
+          <dd>
+            @if (tenant()!.people) {
+              <div>
+                <a [routerLink]="['/person', tenant()!.people?.id, 'view']">{{ tenantRef.people?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.companies">Companies</span></dt>
+          <dd>
+            @if (tenant()!.companies) {
+              <div>
+                <a [routerLink]="['/company', tenant()!.companies?.id, 'view']">{{ tenantRef.companies?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.products">Products</span></dt>
+          <dd>
+            @if (tenant()!.products) {
+              <div>
+                <a [routerLink]="['/product', tenant()!.products?.id, 'view']">{{ tenantRef.products?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.rawMaterials">Raw Materials</span></dt>
+          <dd>
+            @if (tenant()!.rawMaterials) {
+              <div>
+                <a [routerLink]="['/raw-material', tenant()!.rawMaterials?.id, 'view']">{{ tenantRef.rawMaterials?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.warehouses">Warehouses</span></dt>
+          <dd>
+            @if (tenant()!.warehouses) {
+              <div>
+                <a [routerLink]="['/warehouse', tenant()!.warehouses?.id, 'view']">{{ tenantRef.warehouses?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.sales">Sales</span></dt>
+          <dd>
+            @if (tenant()!.sales) {
+              <div>
+                <a [routerLink]="['/sale', tenant()!.sales?.id, 'view']">{{ tenantRef.sales?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.saleItems">Sale Items</span></dt>
+          <dd>
+            @if (tenant()!.saleItems) {
+              <div>
+                <a [routerLink]="['/sale-item', tenant()!.saleItems?.id, 'view']">{{ tenantRef.saleItems?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.tenant.stockMovements">Stock Movements</span></dt>
+          <dd>
+            @if (tenant()!.stockMovements) {
+              <div>
+                <a [routerLink]="['/stock-movement', tenant()!.stockMovements?.id, 'view']">{{ tenantRef.stockMovements?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/tenant', tenantRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

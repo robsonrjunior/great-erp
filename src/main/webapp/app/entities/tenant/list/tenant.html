@@ -1,0 +1,287 @@
+<div>
+  <h2 id="page-heading" data-cy="TenantHeading">
+    <span jhiTranslate="greatErpApp.tenant.home.title">Tenants</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="greatErpApp.tenant.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-tenant"
+        [routerLink]="['/tenant/new']"
+      >
+        <fa-icon icon="plus" />
+        <span class="hidden-sm-down" jhiTranslate="greatErpApp.tenant.home.createLabel">Criar novo Tenant</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="greatErpApp.tenant.home.search">Pesquisar por Tenant</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'greatErpApp.tenant.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch())">
+          <fa-icon icon="search" />
+        </button>
+
+        @if (currentSearch()) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt" />
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  <jhi-filter [filters]="filters" />
+
+  @if (tenants().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="greatErpApp.tenant.home.notFound">Nenhum Tenant encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">Código</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.name">Name</span>
+                @if (!currentSearch()) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="code">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.code">Code</span>
+                @if (!currentSearch()) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="active">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.active">Active</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedAt">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.deletedAt">Deleted At</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="customers.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.customers">Customers</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="suppliers.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.suppliers">Suppliers</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="people.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.people">People</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="companies.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.companies">Companies</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="products.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.products">Products</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="rawMaterials.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.rawMaterials">Raw Materials</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="warehouses.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.warehouses">Warehouses</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sales.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.sales">Sales</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="saleItems.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.saleItems">Sale Items</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="stockMovements.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.tenant.stockMovements">Stock Movements</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (tenant of tenants(); track trackId(tenant)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/tenant', tenant.id, 'view']">{{ tenant.id }}</a>
+              </td>
+              <td>{{ tenant.name }}</td>
+              <td>{{ tenant.code }}</td>
+              <td>{{ tenant.active }}</td>
+              <td>{{ tenant.deletedAt | formatMediumDatetime }}</td>
+              <td>
+                @if (tenant.customers) {
+                  <div>
+                    <a [routerLink]="['/customer', tenant.customers.id, 'view']">{{ tenant.customers.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (tenant.suppliers) {
+                  <div>
+                    <a [routerLink]="['/supplier', tenant.suppliers.id, 'view']">{{ tenant.suppliers.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (tenant.people) {
+                  <div>
+                    <a [routerLink]="['/person', tenant.people.id, 'view']">{{ tenant.people.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (tenant.companies) {
+                  <div>
+                    <a [routerLink]="['/company', tenant.companies.id, 'view']">{{ tenant.companies.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (tenant.products) {
+                  <div>
+                    <a [routerLink]="['/product', tenant.products.id, 'view']">{{ tenant.products.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (tenant.rawMaterials) {
+                  <div>
+                    <a [routerLink]="['/raw-material', tenant.rawMaterials.id, 'view']">{{ tenant.rawMaterials.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (tenant.warehouses) {
+                  <div>
+                    <a [routerLink]="['/warehouse', tenant.warehouses.id, 'view']">{{ tenant.warehouses.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (tenant.sales) {
+                  <div>
+                    <a [routerLink]="['/sale', tenant.sales.id, 'view']">{{ tenant.sales.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (tenant.saleItems) {
+                  <div>
+                    <a [routerLink]="['/sale-item', tenant.saleItems.id, 'view']">{{ tenant.saleItems.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (tenant.stockMovements) {
+                  <div>
+                    <a [routerLink]="['/stock-movement', tenant.stockMovements.id, 'view']">{{ tenant.stockMovements.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/tenant', tenant.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+                  </a>
+
+                  <a [routerLink]="['/tenant', tenant.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(tenant)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (tenants().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

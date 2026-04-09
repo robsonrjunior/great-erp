@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (sale(); as saleRef) {
+      <div>
+        <h2 data-cy="saleDetailsHeading"><span jhiTranslate="greatErpApp.sale.detail.title">Sale</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ saleRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.sale.saleDate">Sale Date</span></dt>
+          <dd>
+            <span>{{ saleRef.saleDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.sale.saleNumber">Sale Number</span></dt>
+          <dd>
+            <span>{{ saleRef.saleNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.sale.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'greatErpApp.SaleStatus.' + (saleRef.status ?? 'null')">{{
+              { null: '', OPEN: 'OPEN', CONFIRMED: 'CONFIRMED', INVOICED: 'INVOICED', CANCELED: 'CANCELED' }[saleRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.sale.grossAmount">Gross Amount</span></dt>
+          <dd>
+            <span>{{ saleRef.grossAmount }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.sale.discountAmount">Discount Amount</span></dt>
+          <dd>
+            <span>{{ saleRef.discountAmount }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.sale.netAmount">Net Amount</span></dt>
+          <dd>
+            <span>{{ saleRef.netAmount }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.sale.notes">Notes</span></dt>
+          <dd>
+            <span>{{ saleRef.notes }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.sale.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ saleRef.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.sale.items">Items</span></dt>
+          <dd>
+            @if (sale()!.items) {
+              <div>
+                <a [routerLink]="['/sale-item', sale()!.items?.id, 'view']">{{ saleRef.items?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/sale', saleRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

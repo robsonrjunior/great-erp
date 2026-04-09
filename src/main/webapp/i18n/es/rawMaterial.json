@@ -1,0 +1,35 @@
+{
+  "greatErpApp": {
+    "rawMaterial": {
+      "home": {
+        "title": "Raw Materials",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Raw Material",
+        "createOrEditLabel": "Crear o editar Raw Material",
+        "search": "Buscar Raw Material",
+        "notFound": "Ningún Raw Materials encontrado"
+      },
+      "created": "Un nuevo Raw Material ha sido creado con el identificador {{ param }}",
+      "updated": "Un Raw Material ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Raw Material ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Raw Material {{ id }}?"
+      },
+      "detail": {
+        "title": "Raw Material"
+      },
+      "id": "ID",
+      "name": "Name",
+      "sku": "Sku",
+      "unitOfMeasure": "Unit Of Measure",
+      "unitDecimalPlaces": "Unit Decimal Places",
+      "unitCost": "Unit Cost",
+      "minStock": "Min Stock",
+      "active": "Active",
+      "deletedAt": "Deleted At",
+      "stockMovements": "Stock Movements",
+      "tenant": "Tenant",
+      "primarySupplier": "Primary Supplier"
+    }
+  }
+}

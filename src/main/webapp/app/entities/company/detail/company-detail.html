@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (company(); as companyRef) {
+      <div>
+        <h2 data-cy="companyDetailsHeading"><span jhiTranslate="greatErpApp.company.detail.title">Company</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ companyRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.company.legalName">Legal Name</span></dt>
+          <dd>
+            <span>{{ companyRef.legalName }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.company.tradeName">Trade Name</span></dt>
+          <dd>
+            <span>{{ companyRef.tradeName }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.company.cnpj">Cnpj</span></dt>
+          <dd>
+            <span>{{ companyRef.cnpj }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.company.stateRegistration">State Registration</span></dt>
+          <dd>
+            <span>{{ companyRef.stateRegistration }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.company.email">Email</span></dt>
+          <dd>
+            <span>{{ companyRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.company.phone">Phone</span></dt>
+          <dd>
+            <span>{{ companyRef.phone }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.company.active">Active</span></dt>
+          <dd>
+            <span>{{ companyRef.active }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.company.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ companyRef.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/company', companyRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,210 @@
+<div>
+  <h2 id="page-heading" data-cy="CityHeading">
+    <span jhiTranslate="greatErpApp.city.home.title">Cities</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="greatErpApp.city.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-city"
+        [routerLink]="['/city/new']"
+      >
+        <fa-icon icon="plus" />
+        <span class="hidden-sm-down" jhiTranslate="greatErpApp.city.home.createLabel">Criar novo City</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="greatErpApp.city.home.search">Pesquisar por City</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'greatErpApp.city.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch())">
+          <fa-icon icon="search" />
+        </button>
+
+        @if (currentSearch()) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt" />
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  <jhi-filter [filters]="filters" />
+
+  @if (cities().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="greatErpApp.city.home.notFound">Nenhum City encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">Código</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.city.name">Name</span>
+                @if (!currentSearch()) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="suppliers.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.city.suppliers">Suppliers</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="customers.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.city.customers">Customers</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="people.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.city.people">People</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="companies.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.city.companies">Companies</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="warehouses.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.city.warehouses">Warehouses</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="state.id">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.city.state">State</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (city of cities(); track trackId(city)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/city', city.id, 'view']">{{ city.id }}</a>
+              </td>
+              <td>{{ city.name }}</td>
+              <td>
+                @if (city.suppliers) {
+                  <div>
+                    <a [routerLink]="['/supplier', city.suppliers.id, 'view']">{{ city.suppliers.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (city.customers) {
+                  <div>
+                    <a [routerLink]="['/customer', city.customers.id, 'view']">{{ city.customers.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (city.people) {
+                  <div>
+                    <a [routerLink]="['/person', city.people.id, 'view']">{{ city.people.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (city.companies) {
+                  <div>
+                    <a [routerLink]="['/company', city.companies.id, 'view']">{{ city.companies.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (city.warehouses) {
+                  <div>
+                    <a [routerLink]="['/warehouse', city.warehouses.id, 'view']">{{ city.warehouses.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (city.state) {
+                  <div>
+                    <a [routerLink]="['/state', city.state.id, 'view']">{{ city.state.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/city', city.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+                  </a>
+
+                  <a [routerLink]="['/city', city.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(city)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (cities().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

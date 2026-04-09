@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity City.
+    -->
+    <changeSet id="20260409002044-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="suppliers_id"
+                                 baseTableName="city"
+                                 constraintName="fk_city__suppliers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="supplier"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="customers_id"
+                                 baseTableName="city"
+                                 constraintName="fk_city__customers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="people_id"
+                                 baseTableName="city"
+                                 constraintName="fk_city__people_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="companies_id"
+                                 baseTableName="city"
+                                 constraintName="fk_city__companies_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="warehouses_id"
+                                 baseTableName="city"
+                                 constraintName="fk_city__warehouses_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="warehouse"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="state_id"
+                                 baseTableName="city"
+                                 constraintName="fk_city__state_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="state"
+                                 />
+    </changeSet>
+</databaseChangeLog>

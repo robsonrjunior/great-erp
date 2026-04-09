@@ -1,0 +1,184 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-company-heading" data-cy="CompanyCreateUpdateHeading" jhiTranslate="greatErpApp.company.home.createOrEditLabel">
+        Criar ou editar Company
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">Código</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let legalNameRef = editForm.get('legalName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_legalName" jhiTranslate="greatErpApp.company.legalName">Legal Name</label>
+          <input type="text" class="form-control" name="legalName" id="field_legalName" data-cy="legalName" formControlName="legalName" />
+          @if (legalNameRef.invalid && (legalNameRef.dirty || legalNameRef.touched)) {
+            <div>
+              @if (editForm.get('legalName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+              @if (editForm.get('legalName')?.errors?.minlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: '2' }"
+                  >Este campo deve ter pelo menos 2 caracteres.</small
+                >
+              }
+              @if (editForm.get('legalName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '120' }"
+                  >Este campo não pode ter mais de 120 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let tradeNameRef = editForm.get('tradeName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_tradeName" jhiTranslate="greatErpApp.company.tradeName">Trade Name</label>
+          <input type="text" class="form-control" name="tradeName" id="field_tradeName" data-cy="tradeName" formControlName="tradeName" />
+          @if (tradeNameRef.invalid && (tradeNameRef.dirty || tradeNameRef.touched)) {
+            <div>
+              @if (editForm.get('tradeName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '120' }"
+                  >Este campo não pode ter mais de 120 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let cnpjRef = editForm.get('cnpj')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_cnpj" jhiTranslate="greatErpApp.company.cnpj">Cnpj</label>
+          <input type="text" class="form-control" name="cnpj" id="field_cnpj" data-cy="cnpj" formControlName="cnpj" />
+          @if (cnpjRef.invalid && (cnpjRef.dirty || cnpjRef.touched)) {
+            <div>
+              @if (editForm.get('cnpj')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+              @if (editForm.get('cnpj')?.errors?.minlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: '14' }"
+                  >Este campo deve ter pelo menos 14 caracteres.</small
+                >
+              }
+              @if (editForm.get('cnpj')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '18' }"
+                  >Este campo não pode ter mais de 18 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let stateRegistrationRef = editForm.get('stateRegistration')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_stateRegistration" jhiTranslate="greatErpApp.company.stateRegistration"
+            >State Registration</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="stateRegistration"
+            id="field_stateRegistration"
+            data-cy="stateRegistration"
+            formControlName="stateRegistration"
+          />
+          @if (stateRegistrationRef.invalid && (stateRegistrationRef.dirty || stateRegistrationRef.touched)) {
+            <div>
+              @if (editForm.get('stateRegistration')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '30' }"
+                  >Este campo não pode ter mais de 30 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let emailRef = editForm.get('email')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_email" jhiTranslate="greatErpApp.company.email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          @if (emailRef.invalid && (emailRef.dirty || emailRef.touched)) {
+            <div>
+              @if (editForm.get('email')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '120' }"
+                  >Este campo não pode ter mais de 120 caracteres.</small
+                >
+              }
+              @if (editForm.get('email')?.errors?.pattern) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Email' }"
+                  >Este campo deve estar dentro do seguinte padrão Email.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let phoneRef = editForm.get('phone')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_phone" jhiTranslate="greatErpApp.company.phone">Phone</label>
+          <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+          @if (phoneRef.invalid && (phoneRef.dirty || phoneRef.touched)) {
+            <div>
+              @if (editForm.get('phone')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '30' }"
+                  >Este campo não pode ter mais de 30 caracteres.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let activeRef = editForm.get('active')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_active" jhiTranslate="greatErpApp.company.active">Active</label>
+          <input type="checkbox" class="form-check" name="active" id="field_active" data-cy="active" formControlName="active" />
+          @if (activeRef.invalid && (activeRef.dirty || activeRef.touched)) {
+            <div>
+              @if (editForm.get('active')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">O campo é obrigatório.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_deletedAt" jhiTranslate="greatErpApp.company.deletedAt">Deleted At</label>
+          <div class="d-flex">
+            <input
+              id="field_deletedAt"
+              data-cy="deletedAt"
+              type="datetime-local"
+              class="form-control"
+              name="deletedAt"
+              formControlName="deletedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Salvar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

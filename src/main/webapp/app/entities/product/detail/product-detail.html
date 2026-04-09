@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (product(); as productRef) {
+      <div>
+        <h2 data-cy="productDetailsHeading"><span jhiTranslate="greatErpApp.product.detail.title">Product</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ productRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.product.name">Name</span></dt>
+          <dd>
+            <span>{{ productRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.product.sku">Sku</span></dt>
+          <dd>
+            <span>{{ productRef.sku }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.product.unitOfMeasure">Unit Of Measure</span></dt>
+          <dd>
+            <span [jhiTranslate]="'greatErpApp.UnitOfMeasure.' + (productRef.unitOfMeasure ?? 'null')">{{
+              { null: '', UNIT: 'UNIT', KG: 'KG', LITER: 'LITER', METER: 'METER', BOX: 'BOX' }[productRef.unitOfMeasure ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.product.unitDecimalPlaces">Unit Decimal Places</span></dt>
+          <dd>
+            <span>{{ productRef.unitDecimalPlaces }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.product.salePrice">Sale Price</span></dt>
+          <dd>
+            <span>{{ productRef.salePrice }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.product.costPrice">Cost Price</span></dt>
+          <dd>
+            <span>{{ productRef.costPrice }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.product.minStock">Min Stock</span></dt>
+          <dd>
+            <span>{{ productRef.minStock }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.product.active">Active</span></dt>
+          <dd>
+            <span>{{ productRef.active }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.product.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ productRef.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.product.saleItems">Sale Items</span></dt>
+          <dd>
+            @if (product()!.saleItems) {
+              <div>
+                <a [routerLink]="['/sale-item', product()!.saleItems?.id, 'view']">{{ productRef.saleItems?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.product.stockMovements">Stock Movements</span></dt>
+          <dd>
+            @if (product()!.stockMovements) {
+              <div>
+                <a [routerLink]="['/stock-movement', product()!.stockMovements?.id, 'view']">{{ productRef.stockMovements?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/product', productRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

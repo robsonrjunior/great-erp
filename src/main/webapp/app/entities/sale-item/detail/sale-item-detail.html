@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (saleItem(); as saleItemRef) {
+      <div>
+        <h2 data-cy="saleItemDetailsHeading"><span jhiTranslate="greatErpApp.saleItem.detail.title">Sale Item</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ saleItemRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.saleItem.quantity">Quantity</span></dt>
+          <dd>
+            <span>{{ saleItemRef.quantity }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.saleItem.unitPrice">Unit Price</span></dt>
+          <dd>
+            <span>{{ saleItemRef.unitPrice }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.saleItem.discountAmount">Discount Amount</span></dt>
+          <dd>
+            <span>{{ saleItemRef.discountAmount }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.saleItem.lineTotal">Line Total</span></dt>
+          <dd>
+            <span>{{ saleItemRef.lineTotal }}</span>
+          </dd>
+          <dt><span jhiTranslate="greatErpApp.saleItem.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ saleItemRef.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/sale-item', saleItemRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,250 @@
+<div>
+  <h2 id="page-heading" data-cy="StockMovementHeading">
+    <span jhiTranslate="greatErpApp.stockMovement.home.title">Stock Movements</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="greatErpApp.stockMovement.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-stock-movement"
+        [routerLink]="['/stock-movement/new']"
+      >
+        <fa-icon icon="plus" />
+        <span class="hidden-sm-down" jhiTranslate="greatErpApp.stockMovement.home.createLabel">Criar novo Stock Movement</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="greatErpApp.stockMovement.home.search"
+          >Pesquisar por Stock Movement</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'greatErpApp.stockMovement.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch())">
+          <fa-icon icon="search" />
+        </button>
+
+        @if (currentSearch()) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt" />
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  <jhi-filter [filters]="filters" />
+
+  @if (stockMovements().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="greatErpApp.stockMovement.home.notFound">Nenhum Stock Movement encontrado</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">Código</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="movementDate">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.stockMovement.movementDate">Movement Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="movementType">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.stockMovement.movementType">Movement Type</span>
+                @if (!currentSearch()) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="quantity">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.stockMovement.quantity">Quantity</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="unitCost">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.stockMovement.unitCost">Unit Cost</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="referenceNumber">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.stockMovement.referenceNumber">Reference Number</span>
+                @if (!currentSearch()) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="notes">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.stockMovement.notes">Notes</span>
+                @if (!currentSearch()) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedAt">
+              <div class="d-flex">
+                <span jhiTranslate="greatErpApp.stockMovement.deletedAt">Deleted At</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (stockMovement of stockMovements(); track trackId(stockMovement)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/stock-movement', stockMovement.id, 'view']">{{ stockMovement.id }}</a>
+              </td>
+              <td>{{ stockMovement.movementDate | formatMediumDatetime }}</td>
+              <td [jhiTranslate]="'greatErpApp.MovementType.' + (stockMovement.movementType ?? 'null')">
+                {{
+                  { null: '', INBOUND: 'INBOUND', OUTBOUND: 'OUTBOUND', ADJUSTMENT: 'ADJUSTMENT', TRANSFER: 'TRANSFER' }[
+                    stockMovement.movementType ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ stockMovement.quantity }}</td>
+              <td>{{ stockMovement.unitCost }}</td>
+              <td>{{ stockMovement.referenceNumber }}</td>
+              <td>{{ stockMovement.notes }}</td>
+              <td>{{ stockMovement.deletedAt | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/tenant']"
+                    [queryParams]="{ 'filter[stockMovementsId.in]': stockMovement.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('greatErpApp.stockMovement.tenant' | translate) }"
+                      >Mostrar Tenant</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/warehouse']"
+                    [queryParams]="{ 'filter[stockMovementsId.in]': stockMovement.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('greatErpApp.stockMovement.warehouse' | translate) }"
+                      >Mostrar Warehouse</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/product']"
+                    [queryParams]="{ 'filter[stockMovementsId.in]': stockMovement.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('greatErpApp.stockMovement.product' | translate) }"
+                      >Mostrar Product</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/raw-material']"
+                    [queryParams]="{ 'filter[stockMovementsId.in]': stockMovement.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('greatErpApp.stockMovement.rawMaterial' | translate) }"
+                      >Mostrar Raw Material</span
+                    >
+                  </button>
+                  <a [routerLink]="['/stock-movement', stockMovement.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Visualizar</span>
+                  </a>
+
+                  <a [routerLink]="['/stock-movement', stockMovement.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(stockMovement)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (stockMovements().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>
