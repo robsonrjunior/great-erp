@@ -2,35 +2,35 @@
   "greatErpApp": {
     "sale": {
       "home": {
-        "title": "Sales",
+        "title": "Vendas",
         "refreshListLabel": "Atualizar lista",
-        "createLabel": "Criar novo Sale",
-        "createOrEditLabel": "Criar ou editar Sale",
-        "search": "Pesquisar por Sale",
-        "notFound": "Nenhum Sale encontrado"
+        "createLabel": "Criar nova Venda",
+        "createOrEditLabel": "Criar ou editar Venda",
+        "search": "Pesquisar por Venda",
+        "notFound": "Nenhuma Venda encontrada"
       },
-      "created": "Um novo Sale foi criado com o identificador {{ param }}",
-      "updated": "Um Sale foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Sale foi excluído com o identificador {{ param }}",
+      "created": "Uma nova Venda foi criada com o identificador {{ param }}",
+      "updated": "Uma Venda foi atualizada com o identificador {{ param }}",
+      "deleted": "Uma Venda foi excluída com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Sale {{ id }}?"
+        "question": "Tem certeza de que deseja excluir a Venda {{ id }}?"
       },
       "detail": {
-        "title": "Sale"
+        "title": "Venda"
       },
       "id": "ID",
-      "saleDate": "Sale Date",
-      "saleNumber": "Sale Number",
+      "saleDate": "Data da Venda",
+      "saleNumber": "Número da Venda",
       "status": "Status",
-      "grossAmount": "Gross Amount",
-      "discountAmount": "Discount Amount",
-      "netAmount": "Net Amount",
-      "notes": "Notes",
-      "deletedAt": "Deleted At",
-      "items": "Items",
+      "grossAmount": "Valor Bruto",
+      "discountAmount": "Valor do Desconto",
+      "netAmount": "Valor Líquido",
+      "notes": "Observações",
+      "deletedAt": "Excluído em",
+      "items": "Itens",
       "tenant": "Tenant",
-      "warehouse": "Warehouse",
-      "customer": "Customer"
+      "warehouse": "Armazém",
+      "customer": "Cliente"
     }
   }
 }

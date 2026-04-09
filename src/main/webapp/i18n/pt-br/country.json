@@ -2,26 +2,26 @@
   "greatErpApp": {
     "country": {
       "home": {
-        "title": "Countries",
+        "title": "Países",
         "refreshListLabel": "Atualizar lista",
-        "createLabel": "Criar novo Country",
-        "createOrEditLabel": "Criar ou editar Country",
-        "search": "Pesquisar por Country",
-        "notFound": "Nenhum Country encontrado"
+        "createLabel": "Criar novo País",
+        "createOrEditLabel": "Criar ou editar País",
+        "search": "Pesquisar por País",
+        "notFound": "Nenhum País encontrado"
       },
-      "created": "Um novo Country foi criado com o identificador {{ param }}",
-      "updated": "Um Country foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Country foi excluído com o identificador {{ param }}",
+      "created": "Um novo País foi criado com o identificador {{ param }}",
+      "updated": "Um País foi atualizado com o identificador {{ param }}",
+      "deleted": "Um País foi excluído com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Country {{ id }}?"
+        "question": "Tem certeza de que deseja excluir o País {{ id }}?"
       },
       "detail": {
-        "title": "Country"
+        "title": "País"
       },
       "id": "ID",
-      "name": "Name",
-      "isoCode": "Iso Code",
-      "states": "States"
+      "name": "Nome",
+      "isoCode": "Código ISO",
+      "states": "Estados"
     }
   }
 }

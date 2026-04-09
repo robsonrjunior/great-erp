@@ -2,10 +2,10 @@
   "greatErpApp": {
     "SaleStatus": {
       "null": "",
-      "OPEN": "OPEN",
-      "CONFIRMED": "CONFIRMED",
-      "INVOICED": "INVOICED",
-      "CANCELED": "CANCELED"
+      "OPEN": "Aberto",
+      "CONFIRMED": "Confirmado",
+      "INVOICED": "Faturado",
+      "CANCELED": "Cancelado"
     }
   }
 }

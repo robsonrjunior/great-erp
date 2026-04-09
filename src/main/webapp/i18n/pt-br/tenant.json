@@ -13,26 +13,26 @@
       "updated": "Um Tenant foi atualizado com o identificador {{ param }}",
       "deleted": "Um Tenant foi excluído com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Tenant {{ id }}?"
+        "question": "Tem certeza de que deseja excluir o Tenant {{ id }}?"
       },
       "detail": {
         "title": "Tenant"
       },
       "id": "ID",
-      "name": "Name",
-      "code": "Code",
-      "active": "Active",
-      "deletedAt": "Deleted At",
-      "customers": "Customers",
-      "suppliers": "Suppliers",
-      "people": "People",
-      "companies": "Companies",
-      "products": "Products",
-      "rawMaterials": "Raw Materials",
-      "warehouses": "Warehouses",
-      "sales": "Sales",
-      "saleItems": "Sale Items",
-      "stockMovements": "Stock Movements"
+      "name": "Nome",
+      "code": "Código",
+      "active": "Ativo",
+      "deletedAt": "Excluído em",
+      "customers": "Clientes",
+      "suppliers": "Fornecedores",
+      "people": "Pessoas",
+      "companies": "Empresas",
+      "products": "Produtos",
+      "rawMaterials": "Matérias-Primas",
+      "warehouses": "Armazéns",
+      "sales": "Vendas",
+      "saleItems": "Itens de Venda",
+      "stockMovements": "Movimentos de Estoque"
     }
   }
 }

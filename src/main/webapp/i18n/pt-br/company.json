@@ -2,35 +2,35 @@
   "greatErpApp": {
     "company": {
       "home": {
-        "title": "Companies",
+        "title": "Empresas",
         "refreshListLabel": "Atualizar lista",
-        "createLabel": "Criar novo Company",
-        "createOrEditLabel": "Criar ou editar Company",
-        "search": "Pesquisar por Company",
-        "notFound": "Nenhum Company encontrado"
+        "createLabel": "Criar nova Empresa",
+        "createOrEditLabel": "Criar ou editar Empresa",
+        "search": "Pesquisar por Empresa",
+        "notFound": "Nenhuma Empresa encontrada"
       },
-      "created": "Um novo Company foi criado com o identificador {{ param }}",
-      "updated": "Um Company foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Company foi excluído com o identificador {{ param }}",
+      "created": "Uma nova Empresa foi criada com o identificador {{ param }}",
+      "updated": "Uma Empresa foi atualizada com o identificador {{ param }}",
+      "deleted": "Uma Empresa foi excluída com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Company {{ id }}?"
+        "question": "Tem certeza de que deseja excluir a Empresa {{ id }}?"
       },
       "detail": {
-        "title": "Company"
+        "title": "Empresa"
       },
       "id": "ID",
-      "legalName": "Legal Name",
-      "tradeName": "Trade Name",
-      "cnpj": "Cnpj",
-      "stateRegistration": "State Registration",
-      "email": "Email",
-      "phone": "Phone",
-      "active": "Active",
-      "deletedAt": "Deleted At",
-      "customer": "Customer",
-      "supplier": "Supplier",
+      "legalName": "Razão Social",
+      "tradeName": "Nome Fantasia",
+      "cnpj": "CNPJ",
+      "stateRegistration": "Inscrição Estadual",
+      "email": "E-mail",
+      "phone": "Telefone",
+      "active": "Ativo",
+      "deletedAt": "Excluído em",
+      "customer": "Cliente",
+      "supplier": "Fornecedor",
       "tenant": "Tenant",
-      "city": "City"
+      "city": "Cidade"
     }
   }
 }

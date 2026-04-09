@@ -2,31 +2,31 @@
   "greatErpApp": {
     "saleItem": {
       "home": {
-        "title": "Sale Items",
+        "title": "Itens de Venda",
         "refreshListLabel": "Atualizar lista",
-        "createLabel": "Criar novo Sale Item",
-        "createOrEditLabel": "Criar ou editar Sale Item",
-        "search": "Pesquisar por Sale Item",
-        "notFound": "Nenhum Sale Item encontrado"
+        "createLabel": "Criar novo Item de Venda",
+        "createOrEditLabel": "Criar ou editar Item de Venda",
+        "search": "Pesquisar por Item de Venda",
+        "notFound": "Nenhum Item de Venda encontrado"
       },
-      "created": "Um novo Sale Item foi criado com o identificador {{ param }}",
-      "updated": "Um Sale Item foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Sale Item foi excluído com o identificador {{ param }}",
+      "created": "Um novo Item de Venda foi criado com o identificador {{ param }}",
+      "updated": "Um Item de Venda foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Item de Venda foi excluído com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Sale Item {{ id }}?"
+        "question": "Tem certeza de que deseja excluir o Item de Venda {{ id }}?"
       },
       "detail": {
-        "title": "Sale Item"
+        "title": "Item de Venda"
       },
       "id": "ID",
-      "quantity": "Quantity",
-      "unitPrice": "Unit Price",
-      "discountAmount": "Discount Amount",
-      "lineTotal": "Line Total",
-      "deletedAt": "Deleted At",
+      "quantity": "Quantidade",
+      "unitPrice": "Preço Unitário",
+      "discountAmount": "Valor do Desconto",
+      "lineTotal": "Total da Linha",
+      "deletedAt": "Excluído em",
       "tenant": "Tenant",
-      "sale": "Sale",
-      "product": "Product"
+      "sale": "Venda",
+      "product": "Produto"
     }
   }
 }

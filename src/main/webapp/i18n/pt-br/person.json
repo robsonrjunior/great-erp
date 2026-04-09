@@ -2,34 +2,34 @@
   "greatErpApp": {
     "person": {
       "home": {
-        "title": "People",
+        "title": "Pessoas",
         "refreshListLabel": "Atualizar lista",
-        "createLabel": "Criar novo Person",
-        "createOrEditLabel": "Criar ou editar Person",
-        "search": "Pesquisar por Person",
-        "notFound": "Nenhum Person encontrado"
+        "createLabel": "Criar nova Pessoa",
+        "createOrEditLabel": "Criar ou editar Pessoa",
+        "search": "Pesquisar por Pessoa",
+        "notFound": "Nenhuma Pessoa encontrada"
       },
-      "created": "Um novo Person foi criado com o identificador {{ param }}",
-      "updated": "Um Person foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Person foi excluído com o identificador {{ param }}",
+      "created": "Uma nova Pessoa foi criada com o identificador {{ param }}",
+      "updated": "Uma Pessoa foi atualizada com o identificador {{ param }}",
+      "deleted": "Uma Pessoa foi excluída com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Person {{ id }}?"
+        "question": "Tem certeza de que deseja excluir a Pessoa {{ id }}?"
       },
       "detail": {
-        "title": "Person"
+        "title": "Pessoa"
       },
       "id": "ID",
-      "fullName": "Full Name",
-      "cpf": "Cpf",
-      "birthDate": "Birth Date",
-      "email": "Email",
-      "phone": "Phone",
-      "active": "Active",
-      "deletedAt": "Deleted At",
-      "customer": "Customer",
-      "supplier": "Supplier",
+      "fullName": "Nome Completo",
+      "cpf": "CPF",
+      "birthDate": "Data de Nascimento",
+      "email": "E-mail",
+      "phone": "Telefone",
+      "active": "Ativo",
+      "deletedAt": "Excluído em",
+      "customer": "Cliente",
+      "supplier": "Fornecedor",
       "tenant": "Tenant",
-      "city": "City"
+      "city": "Cidade"
     }
   }
 }

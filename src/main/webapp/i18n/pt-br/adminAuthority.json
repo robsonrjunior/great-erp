@@ -2,22 +2,22 @@
   "greatErpApp": {
     "adminAuthority": {
       "home": {
-        "title": "Authorities",
+        "title": "Autoridades",
         "refreshListLabel": "Atualizar lista",
-        "createLabel": "Criar novo Authority",
-        "createOrEditLabel": "Criar ou editar Authority",
-        "notFound": "Nenhum Authority encontrado"
+        "createLabel": "Criar nova Autoridade",
+        "createOrEditLabel": "Criar ou editar Autoridade",
+        "notFound": "Nenhuma Autoridade encontrada"
       },
-      "created": "Um novo Authority foi criado com o identificador {{ param }}",
-      "updated": "Um Authority foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Authority foi excluído com o identificador {{ param }}",
+      "created": "Uma nova Autoridade foi criada com o identificador {{ param }}",
+      "updated": "Uma Autoridade foi atualizada com o identificador {{ param }}",
+      "deleted": "Uma Autoridade foi excluída com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Authority {{ id }}?"
+        "question": "Tem certeza de que deseja excluir a Autoridade {{ id }}?"
       },
       "detail": {
-        "title": "Authority"
+        "title": "Autoridade"
       },
-      "name": "Name"
+      "name": "Nome"
     }
   }
 }

@@ -2,34 +2,34 @@
   "greatErpApp": {
     "product": {
       "home": {
-        "title": "Products",
+        "title": "Produtos",
         "refreshListLabel": "Atualizar lista",
-        "createLabel": "Criar novo Product",
-        "createOrEditLabel": "Criar ou editar Product",
-        "search": "Pesquisar por Product",
-        "notFound": "Nenhum Product encontrado"
+        "createLabel": "Criar novo Produto",
+        "createOrEditLabel": "Criar ou editar Produto",
+        "search": "Pesquisar por Produto",
+        "notFound": "Nenhum Produto encontrado"
       },
-      "created": "Um novo Product foi criado com o identificador {{ param }}",
-      "updated": "Um Product foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Product foi excluído com o identificador {{ param }}",
+      "created": "Um novo Produto foi criado com o identificador {{ param }}",
+      "updated": "Um Produto foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Produto foi excluído com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Product {{ id }}?"
+        "question": "Tem certeza de que deseja excluir o Produto {{ id }}?"
       },
       "detail": {
-        "title": "Product"
+        "title": "Produto"
       },
       "id": "ID",
-      "name": "Name",
-      "sku": "Sku",
-      "unitOfMeasure": "Unit Of Measure",
-      "unitDecimalPlaces": "Unit Decimal Places",
-      "salePrice": "Sale Price",
-      "costPrice": "Cost Price",
-      "minStock": "Min Stock",
-      "active": "Active",
-      "deletedAt": "Deleted At",
-      "saleItems": "Sale Items",
-      "stockMovements": "Stock Movements",
+      "name": "Nome",
+      "sku": "SKU",
+      "unitOfMeasure": "Unidade de Medida",
+      "unitDecimalPlaces": "Casas Decimais da Unidade",
+      "salePrice": "Preço de Venda",
+      "costPrice": "Preço de Custo",
+      "minStock": "Estoque Mínimo",
+      "active": "Ativo",
+      "deletedAt": "Excluído em",
+      "saleItems": "Itens de Venda",
+      "stockMovements": "Movimentos de Estoque",
       "tenant": "Tenant"
     }
   }

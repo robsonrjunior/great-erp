@@ -2,34 +2,34 @@
   "greatErpApp": {
     "rawMaterial": {
       "home": {
-        "title": "Raw Materials",
+        "title": "Matérias-Primas",
         "refreshListLabel": "Atualizar lista",
-        "createLabel": "Criar novo Raw Material",
-        "createOrEditLabel": "Criar ou editar Raw Material",
-        "search": "Pesquisar por Raw Material",
-        "notFound": "Nenhum Raw Material encontrado"
+        "createLabel": "Criar nova Matéria-Prima",
+        "createOrEditLabel": "Criar ou editar Matéria-Prima",
+        "search": "Pesquisar por Matéria-Prima",
+        "notFound": "Nenhuma Matéria-Prima encontrada"
       },
-      "created": "Um novo Raw Material foi criado com o identificador {{ param }}",
-      "updated": "Um Raw Material foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Raw Material foi excluído com o identificador {{ param }}",
+      "created": "Uma nova Matéria-Prima foi criada com o identificador {{ param }}",
+      "updated": "Uma Matéria-Prima foi atualizada com o identificador {{ param }}",
+      "deleted": "Uma Matéria-Prima foi excluída com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Raw Material {{ id }}?"
+        "question": "Tem certeza de que deseja excluir a Matéria-Prima {{ id }}?"
       },
       "detail": {
-        "title": "Raw Material"
+        "title": "Matéria-Prima"
       },
       "id": "ID",
-      "name": "Name",
-      "sku": "Sku",
-      "unitOfMeasure": "Unit Of Measure",
-      "unitDecimalPlaces": "Unit Decimal Places",
-      "unitCost": "Unit Cost",
-      "minStock": "Min Stock",
-      "active": "Active",
-      "deletedAt": "Deleted At",
-      "stockMovements": "Stock Movements",
+      "name": "Nome",
+      "sku": "SKU",
+      "unitOfMeasure": "Unidade de Medida",
+      "unitDecimalPlaces": "Casas Decimais da Unidade",
+      "unitCost": "Custo Unitário",
+      "minStock": "Estoque Mínimo",
+      "active": "Ativo",
+      "deletedAt": "Excluído em",
+      "stockMovements": "Movimentos de Estoque",
       "tenant": "Tenant",
-      "primarySupplier": "Primary Supplier"
+      "primarySupplier": "Fornecedor Principal"
     }
   }
 }
