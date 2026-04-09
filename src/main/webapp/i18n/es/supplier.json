@@ -2,36 +2,36 @@
   "greatErpApp": {
     "supplier": {
       "home": {
-        "title": "Suppliers",
+        "title": "Proveedores",
         "refreshListLabel": "Refrescar lista",
-        "createLabel": "Crear nuevo Supplier",
-        "createOrEditLabel": "Crear o editar Supplier",
-        "search": "Buscar Supplier",
-        "notFound": "Ningún Suppliers encontrado"
+        "createLabel": "Crear nuevo Proveedor",
+        "createOrEditLabel": "Crear o editar Proveedor",
+        "search": "Buscar Proveedor",
+        "notFound": "No se encontraron Proveedores"
       },
-      "created": "Un nuevo Supplier ha sido creado con el identificador {{ param }}",
-      "updated": "Un Supplier ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Supplier ha sido eliminado con el identificador {{ param }}",
+      "created": "Un nuevo Proveedor ha sido creado con el identificador {{ param }}",
+      "updated": "Un Proveedor ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Proveedor ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Supplier {{ id }}?"
+        "question": "¿Seguro que quiere eliminar el Proveedor {{ id }}?"
       },
       "detail": {
-        "title": "Supplier"
+        "title": "Proveedor"
       },
       "id": "ID",
-      "legalName": "Legal Name",
-      "tradeName": "Trade Name",
-      "taxId": "Tax Id",
-      "partyType": "Party Type",
-      "email": "Email",
-      "phone": "Phone",
-      "active": "Active",
-      "deletedAt": "Deleted At",
-      "person": "Person",
-      "company": "Company",
-      "rawMaterials": "Raw Materials",
+      "legalName": "Razón Social",
+      "tradeName": "Nombre Comercial",
+      "taxId": "NIF/CIF",
+      "partyType": "Tipo de Persona",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "active": "Activo",
+      "deletedAt": "Eliminado en",
+      "person": "Persona",
+      "company": "Empresa",
+      "rawMaterials": "Materias Primas",
       "tenant": "Tenant",
-      "city": "City"
+      "city": "Ciudad"
     }
   }
 }

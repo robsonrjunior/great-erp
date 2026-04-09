@@ -2,34 +2,34 @@
   "greatErpApp": {
     "stockMovement": {
       "home": {
-        "title": "Stock Movements",
+        "title": "Movimientos de Stock",
         "refreshListLabel": "Refrescar lista",
-        "createLabel": "Crear nuevo Stock Movement",
-        "createOrEditLabel": "Crear o editar Stock Movement",
-        "search": "Buscar Stock Movement",
-        "notFound": "Ningún Stock Movements encontrado"
+        "createLabel": "Crear nuevo Movimiento de Stock",
+        "createOrEditLabel": "Crear o editar Movimiento de Stock",
+        "search": "Buscar Movimiento de Stock",
+        "notFound": "No se encontraron Movimientos de Stock"
       },
-      "created": "Un nuevo Stock Movement ha sido creado con el identificador {{ param }}",
-      "updated": "Un Stock Movement ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Stock Movement ha sido eliminado con el identificador {{ param }}",
+      "created": "Un nuevo Movimiento de Stock ha sido creado con el identificador {{ param }}",
+      "updated": "Un Movimiento de Stock ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Movimiento de Stock ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Stock Movement {{ id }}?"
+        "question": "¿Seguro que quiere eliminar el Movimiento de Stock {{ id }}?"
       },
       "detail": {
-        "title": "Stock Movement"
+        "title": "Movimiento de Stock"
       },
       "id": "ID",
-      "movementDate": "Movement Date",
-      "movementType": "Movement Type",
-      "quantity": "Quantity",
-      "unitCost": "Unit Cost",
-      "referenceNumber": "Reference Number",
-      "notes": "Notes",
-      "deletedAt": "Deleted At",
+      "movementDate": "Fecha de Movimiento",
+      "movementType": "Tipo de Movimiento",
+      "quantity": "Cantidad",
+      "unitCost": "Costo Unitario",
+      "referenceNumber": "Número de Referencia",
+      "notes": "Notas",
+      "deletedAt": "Eliminado en",
       "tenant": "Tenant",
-      "warehouse": "Warehouse",
-      "product": "Product",
-      "rawMaterial": "Raw Material"
+      "warehouse": "Almacén",
+      "product": "Producto",
+      "rawMaterial": "Materia Prima"
     }
   }
 }

@@ -7,32 +7,32 @@
         "createLabel": "Crear nuevo Tenant",
         "createOrEditLabel": "Crear o editar Tenant",
         "search": "Buscar Tenant",
-        "notFound": "Ningún Tenants encontrado"
+        "notFound": "No se encontraron Tenants"
       },
       "created": "Un nuevo Tenant ha sido creado con el identificador {{ param }}",
       "updated": "Un Tenant ha sido actualizado con el identificador {{ param }}",
       "deleted": "Un Tenant ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Tenant {{ id }}?"
+        "question": "¿Seguro que quiere eliminar el Tenant {{ id }}?"
       },
       "detail": {
         "title": "Tenant"
       },
       "id": "ID",
-      "name": "Name",
-      "code": "Code",
-      "active": "Active",
-      "deletedAt": "Deleted At",
-      "customers": "Customers",
-      "suppliers": "Suppliers",
-      "people": "People",
-      "companies": "Companies",
-      "products": "Products",
-      "rawMaterials": "Raw Materials",
-      "warehouses": "Warehouses",
-      "sales": "Sales",
-      "saleItems": "Sale Items",
-      "stockMovements": "Stock Movements"
+      "name": "Nombre",
+      "code": "Código",
+      "active": "Activo",
+      "deletedAt": "Eliminado en",
+      "customers": "Clientes",
+      "suppliers": "Proveedores",
+      "people": "Personas",
+      "companies": "Empresas",
+      "products": "Productos",
+      "rawMaterials": "Materias Primas",
+      "warehouses": "Almacenes",
+      "sales": "Ventas",
+      "saleItems": "Ítems de Venta",
+      "stockMovements": "Movimientos de Stock"
     }
   }
 }

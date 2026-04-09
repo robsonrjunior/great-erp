@@ -2,30 +2,30 @@
   "greatErpApp": {
     "city": {
       "home": {
-        "title": "Cities",
+        "title": "Ciudades",
         "refreshListLabel": "Refrescar lista",
-        "createLabel": "Crear nuevo City",
-        "createOrEditLabel": "Crear o editar City",
-        "search": "Buscar City",
-        "notFound": "Ningún Cities encontrado"
+        "createLabel": "Crear nueva Ciudad",
+        "createOrEditLabel": "Crear o editar Ciudad",
+        "search": "Buscar Ciudad",
+        "notFound": "No se encontraron Ciudades"
       },
-      "created": "Un nuevo City ha sido creado con el identificador {{ param }}",
-      "updated": "Un City ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un City ha sido eliminado con el identificador {{ param }}",
+      "created": "Una nueva Ciudad ha sido creada con el identificador {{ param }}",
+      "updated": "Una Ciudad ha sido actualizada con el identificador {{ param }}",
+      "deleted": "Una Ciudad ha sido eliminada con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar City {{ id }}?"
+        "question": "¿Seguro que quiere eliminar la Ciudad {{ id }}?"
       },
       "detail": {
-        "title": "City"
+        "title": "Ciudad"
       },
       "id": "ID",
-      "name": "Name",
-      "suppliers": "Suppliers",
-      "customers": "Customers",
-      "people": "People",
-      "companies": "Companies",
-      "warehouses": "Warehouses",
-      "state": "State"
+      "name": "Nombre",
+      "suppliers": "Proveedores",
+      "customers": "Clientes",
+      "people": "Personas",
+      "companies": "Empresas",
+      "warehouses": "Almacenes",
+      "state": "Estado"
     }
   }
 }

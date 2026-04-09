@@ -2,31 +2,31 @@
   "greatErpApp": {
     "warehouse": {
       "home": {
-        "title": "Warehouses",
+        "title": "Almacenes",
         "refreshListLabel": "Refrescar lista",
-        "createLabel": "Crear nuevo Warehouse",
-        "createOrEditLabel": "Crear o editar Warehouse",
-        "search": "Buscar Warehouse",
-        "notFound": "Ningún Warehouses encontrado"
+        "createLabel": "Crear nuevo Almacén",
+        "createOrEditLabel": "Crear o editar Almacén",
+        "search": "Buscar Almacén",
+        "notFound": "No se encontraron Almacenes"
       },
-      "created": "Un nuevo Warehouse ha sido creado con el identificador {{ param }}",
-      "updated": "Un Warehouse ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Warehouse ha sido eliminado con el identificador {{ param }}",
+      "created": "Un nuevo Almacén ha sido creado con el identificador {{ param }}",
+      "updated": "Un Almacén ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Almacén ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Warehouse {{ id }}?"
+        "question": "¿Seguro que quiere eliminar el Almacén {{ id }}?"
       },
       "detail": {
-        "title": "Warehouse"
+        "title": "Almacén"
       },
       "id": "ID",
-      "name": "Name",
-      "code": "Code",
-      "active": "Active",
-      "deletedAt": "Deleted At",
-      "stockMovements": "Stock Movements",
-      "sales": "Sales",
+      "name": "Nombre",
+      "code": "Código",
+      "active": "Activo",
+      "deletedAt": "Eliminado en",
+      "stockMovements": "Movimientos de Stock",
+      "sales": "Ventas",
       "tenant": "Tenant",
-      "city": "City"
+      "city": "Ciudad"
     }
   }
 }
