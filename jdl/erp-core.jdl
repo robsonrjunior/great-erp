@@ -1,0 +1,198 @@
+/**
+ * ERP Core Domain (English naming)
+ * JHipster 9 compatible baseline for a multi-tenant ERP.
+ */
+
+enum MovementType {
+  INBOUND,
+  OUTBOUND,
+  ADJUSTMENT,
+  TRANSFER
+}
+
+enum UnitOfMeasure {
+  UNIT,
+  KG,
+  LITER,
+  METER,
+  BOX
+}
+
+enum SaleStatus {
+  OPEN,
+  CONFIRMED,
+  INVOICED,
+  CANCELED
+}
+
+enum PartyType {
+  PERSON,
+  COMPANY
+}
+
+entity Tenant {
+  name String required minlength(2) maxlength(100),
+  code String required unique minlength(2) maxlength(30),
+  active Boolean required,
+  deletedAt Instant
+}
+
+entity Country {
+  name String required minlength(2) maxlength(100),
+  isoCode String required unique minlength(2) maxlength(3)
+}
+
+entity State {
+  name String required minlength(2) maxlength(100),
+  code String required minlength(2) maxlength(10)
+}
+
+entity City {
+  name String required minlength(2) maxlength(100)
+}
+
+entity Supplier {
+  legalName String required minlength(2) maxlength(120),
+  tradeName String maxlength(120),
+  taxId String required minlength(11) maxlength(20),
+  partyType PartyType required,
+  email String maxlength(120) pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/),
+  phone String maxlength(30),
+  active Boolean required,
+  deletedAt Instant
+}
+
+entity Customer {
+  legalName String required minlength(2) maxlength(120),
+  tradeName String maxlength(120),
+  taxId String required minlength(11) maxlength(20),
+  partyType PartyType required,
+  email String maxlength(120) pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/),
+  phone String maxlength(30),
+  active Boolean required,
+  deletedAt Instant
+}
+
+entity Person {
+  fullName String required minlength(2) maxlength(120),
+  cpf String required minlength(11) maxlength(14),
+  birthDate LocalDate,
+  email String maxlength(120) pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/),
+  phone String maxlength(30),
+  active Boolean required,
+  deletedAt Instant
+}
+
+entity Company {
+  legalName String required minlength(2) maxlength(120),
+  tradeName String maxlength(120),
+  cnpj String required minlength(14) maxlength(18),
+  stateRegistration String maxlength(30),
+  email String maxlength(120) pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/),
+  phone String maxlength(30),
+  active Boolean required,
+  deletedAt Instant
+}
+
+entity Product {
+  name String required minlength(2) maxlength(120),
+  sku String required minlength(2) maxlength(40),
+  unitOfMeasure UnitOfMeasure required,
+  unitDecimalPlaces Integer required min(0) max(6),
+  salePrice BigDecimal required min(0),
+  costPrice BigDecimal min(0),
+  minStock BigDecimal min(0),
+  active Boolean required,
+  deletedAt Instant
+}
+
+entity RawMaterial {
+  name String required minlength(2) maxlength(120),
+  sku String required minlength(2) maxlength(40),
+  unitOfMeasure UnitOfMeasure required,
+  unitDecimalPlaces Integer required min(0) max(6),
+  unitCost BigDecimal min(0),
+  minStock BigDecimal min(0),
+  active Boolean required,
+  deletedAt Instant
+}
+
+entity Warehouse {
+  name String required minlength(2) maxlength(120),
+  code String required unique minlength(2) maxlength(30),
+  active Boolean required,
+  deletedAt Instant
+}
+
+entity StockMovement {
+  movementDate Instant required,
+  movementType MovementType required,
+  quantity BigDecimal required min(0.000001),
+  unitCost BigDecimal min(0),
+  referenceNumber String maxlength(60),
+  notes String maxlength(500),
+  deletedAt Instant
+}
+
+entity Sale {
+  saleDate Instant required,
+  saleNumber String required minlength(2) maxlength(40),
+  status SaleStatus required,
+  grossAmount BigDecimal required min(0),
+  discountAmount BigDecimal min(0),
+  netAmount BigDecimal required min(0),
+  notes String maxlength(500),
+  deletedAt Instant
+}
+
+entity SaleItem {
+  quantity BigDecimal required min(0.000001),
+  unitPrice BigDecimal required min(0),
+  discountAmount BigDecimal min(0),
+  lineTotal BigDecimal required min(0),
+  deletedAt Instant
+}
+
+relationship OneToMany {
+  Country{states} to State{country required},
+  State{cities} to City{state required}
+}
+
+relationship ManyToOne {
+  Tenant{customers} to Customer{tenant required},
+  Tenant{suppliers} to Supplier{tenant required},
+  Tenant{people} to Person{tenant required},
+  Tenant{companies} to Company{tenant required},
+  Tenant{products} to Product{tenant required},
+  Tenant{rawMaterials} to RawMaterial{tenant required},
+  Tenant{warehouses} to Warehouse{tenant required},
+  Tenant{sales} to Sale{tenant required},
+  Tenant{saleItems} to SaleItem{tenant required},
+  Tenant{stockMovements} to StockMovement{tenant required},
+  City{suppliers} to Supplier{city},
+  City{customers} to Customer{city},
+  City{people} to Person{city},
+  City{companies} to Company{city},
+  City{warehouses} to Warehouse{city},
+  Supplier{rawMaterials} to RawMaterial{primarySupplier},
+  Warehouse{stockMovements} to StockMovement{warehouse required},
+  Warehouse{sales} to Sale{warehouse},
+  Customer{sales} to Sale{customer required},
+  Sale{items} to SaleItem{sale required},
+  Product{saleItems} to SaleItem{product required},
+  Product{stockMovements} to StockMovement{product},
+  RawMaterial{stockMovements} to StockMovement{rawMaterial}
+}
+
+relationship OneToOne {
+  Customer{person} to Person{customer},
+  Customer{company} to Company{customer},
+  Supplier{person} to Person{supplier},
+  Supplier{company} to Company{supplier}
+}
+
+service all with serviceClass
+dto all with mapstruct
+paginate all with pagination
+filter all
+search Product with elasticsearch
